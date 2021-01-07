@@ -34,10 +34,17 @@ You can find a detailed [project rubric, here](https://review.udacity.com/#!/rub
 1. Standalone: `python app.py`
 2. Run in Docker: `./run_docker.sh`
 3. Run in Kubernetes: `./run_kubernetes.sh`
+4. To upload the docker image to your Docker hub by running the script `upload_docker.sh`
+5. Create a directory `.circleci` and create a configuration file `config.yml` inside of it to integrate CircleCI
 
-### Kubernetes Steps
+### Making a House Price Prediction
 
-- Setup and Configure Docker locally
-- Setup and Configure Kubernetes locally
+- Run Docker or kubernetes shell scripts on another terminal: `make_predictions.sh` to make a prediction
+- Examples of log output can be found in the `docker_out.txt` file
+
+### Steps to Run App in a Kubernetes Cluster
+
+- Setup and Configure [Docker](https://docs.docker.com/get-docker/) locally (You need to have a docker account)
+- Setup and Configure [Kubernetes(Minikube)](https://kubernetes.io/docs/tasks/tools/install-minikube/)
 - Create Flask app in Container
 - Run via kubectl
