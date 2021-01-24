@@ -3,7 +3,6 @@ pipeline {
     stages {
         stage ('Setup environment and dependencies') {
             steps {
-                sh '#!/bin/bash'
                 sh 'make setup'
                 sh 'make install'
             }
