@@ -3,20 +3,25 @@ pipeline {
     stages {
         stage ('Setup environment and dependencies') {
             steps {
-                sh 'make setup'
-                sh 'make install'
+                withPythonEnv('Python3') {
+                    sh 'make install'
+                }
             }
         }
         stage('Lint') {
             steps {
-                sh 'wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v1.16.3/hadolint-Linux-x86_64'
-                sh 'chmod +x /bin/hadolint'
-                sh 'make lint'
+                withPythonEnv('Python3') {
+                    sh 'wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v1.16.3/hadolint-Linux-x86_64'
+                    sh 'chmod +x /bin/hadolint'
+                    sh 'make lint'
+                }
             }
         }
         stage('Build Docker Image') {
             steps {
-                sh './run_docker.sh'
+                withPythonEnv('Python3') {
+                    sh './run_docker.sh'
+                }
             }
         }
     }
