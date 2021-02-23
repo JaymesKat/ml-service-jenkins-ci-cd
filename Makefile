@@ -12,9 +12,9 @@ setup:
 
 install:
 	# This should be run from inside a virtualenv
-	sudo python3 -m pip install --upgrade pip &&\
-	sudo python3 -m pip install -r requirements.txt 
-	sudo python3 -m pip install pylint
+	python3 -m pip install --upgrade pip --user &&\
+	python3 -m pip install -r requirements.txt --user
+	python3 -m pip install pylint --user
 
 	wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v1.16.3/hadolint-Linux-x86_64
 	chmod +x /bin/hadolint
