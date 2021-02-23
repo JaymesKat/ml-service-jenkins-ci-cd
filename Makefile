@@ -12,9 +12,12 @@ setup:
 
 install:
 	# This should be run from inside a virtualenv
-	python3 -m pip install --upgrade pip &&\
-	python3 -m pip install -r requirements.txt
-	python3 -m pip install pylint
+	sudo python3 -m pip install --upgrade pip &&\
+	sudo python3 -m pip install -r requirements.txt 
+	sudo python3 -m pip install pylint
+
+	wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v1.16.3/hadolint-Linux-x86_64
+	chmod +x /bin/hadolint
 
 test:
 	# Additional, optional, tests could go here
@@ -28,5 +31,8 @@ lint:
 	# This is a linter for Python source code linter: https://www.pylint.org/
 	# This should be run from inside a virtualenv
 	python3 -m pylint --disable=R,C,W1203 app.py
+
+activate_env:
+	. ./devops/bin/activate
 
 all: install lint test
