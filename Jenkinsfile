@@ -5,7 +5,7 @@ pipeline {
             steps {
                 sh '''
                 #!/bin/bash
-                chmod +x -R ${env.WORKSPACE}
+                chmod +x -R ${WORKSPACE}
                 make setup
                 make install
                 '''
@@ -20,9 +20,15 @@ pipeline {
                 '''
             }
         }
-        stage('Build Docker Image') {
+        stage('Push Docker Image') {
             steps {
                 sh './build_upload_docker.sh'
+            }
+        }
+        stage('Update kubeconfig') {
+            steps {
+                sh 'aws eks --region us-west-1 update-kubeconfig --name ml-cluster'
+                sh 'aws eks --region us-west-1 describe-cluster --name ml-cluster --query cluster.status'
             }
         }
     }
