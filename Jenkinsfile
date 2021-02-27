@@ -5,7 +5,7 @@ pipeline {
             steps {
                 sh '''
                 #!/bin/bash
-
+                chmod +x -R ${env.WORKSPACE}
                 make setup
                 make install
                 '''
