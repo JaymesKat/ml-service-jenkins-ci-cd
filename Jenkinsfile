@@ -22,13 +22,17 @@ pipeline {
         }
         stage('Push Docker Image') {
             steps {
-                sh './build_upload_docker.sh'
+                withAWS(region:'us-west-1', credentials: 'aws_credentials') {
+                    sh './build_upload_docker.sh'
+                }
             }
         }
         stage('Update kubeconfig') {
             steps {
-                sh 'aws eks --region us-west-1 update-kubeconfig --name ml-cluster'
-                sh 'aws eks --region us-west-1 describe-cluster --name ml-cluster --query cluster.status'
+                withAWS(region:'us-west-1', credentials: 'aws_credentials') {
+                    sh 'aws eks --region us-west-1 update-kubeconfig --name ml-cluster'
+                    sh 'aws eks --region us-west-1 describe-cluster --name ml-cluster --query cluster.status'
+                }
             }
         }
     }
