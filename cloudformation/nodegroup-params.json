@@ -1,0 +1,39 @@
+[
+    {
+      "ParameterKey": "KeyName",
+      "ParameterValue": "udapeople"
+    }, 
+    {
+        "ParameterKey": "NodeGroupName",
+        "ParameterValue": "worker"
+    },
+    {
+      "ParameterKey": "NodeImageId",
+      "ParameterValue": "ami-08d9a394ac1c2994c"
+    }, 
+    {
+      "ParameterKey": "NodeInstanceType",
+      "ParameterValue": "t2.small"
+    }, 
+    {
+      "ParameterKey": "NodeVolumeSize",
+      "ParameterValue": "8"
+    }, 
+    {
+      "ParameterKey": "ClusterName",
+      "ParameterValue": "ml-cluster"
+    }, 
+    {
+      "ParameterKey": "VpcId",
+      "ParameterValue": "vpc-09720bca166996b47"
+    }, 
+    {
+      "ParameterKey": "ClusterControlPlaneSecurityGroup",
+      "ParameterValue": "sg-0e7b716a6aea016e0"
+    },
+    {
+        "ParameterKey": "Subnets",
+        "ParameterValue": "subnet-0a6b8f448cabe107d,subnet-01d7ab315a5c3936d"
+    }
+  ]
+  

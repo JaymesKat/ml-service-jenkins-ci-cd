@@ -1,0 +1,4 @@
+spec:
+  selector:
+    - app: ml-service
+      name: green

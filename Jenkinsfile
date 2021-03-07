@@ -25,6 +25,7 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 withAWS(region:'us-west-1', credentials: 'aws_credentials') {
+                    sh 'cd scripts'
                     sh './build_upload_docker.sh'
                 }
             }
@@ -33,8 +34,33 @@ pipeline {
             steps {
                 withAWS(region:'us-west-1', credentials: 'aws_credentials') {
                     sh 'aws eks --region us-west-1 update-kubeconfig --name ml-cluster'
-                    sh 'aws eks --region us-west-1 describe-cluster --name ml-cluster --query cluster.status'
-                    sh './kubectl version --client'
+                    sh './kubectl apply -f k8s/service.yaml'
+                }
+            }
+        }
+        stage('Deploy Blue environment') {
+            when { branch 'blue'}
+            steps {
+                withAWS(region:'us-west-1', credentials: 'aws_credentials') {
+                    sh './kubectl apply -f k8s/blue/deployment.yaml'
+                    sh './kubectl get deployments'
+                    sh './kubectl get pods'
+                    sh './k8s/blue-green-deploy.sh ml-deployment-blue ml-service blue'
+                }
+            }
+        }
+        stage('Deploy Green environment') {
+            when { branch 'green'}
+            steps {
+                withAWS(region:'us-west-1', credentials: 'aws_credentials') {
+                    sh './kubectl apply -f k8s/green/deployment.yaml'
+                    sh './kubectl get deployments'
+                    sh './kubectl get pods'
+                    sh './k8s/blue-green-deploy.sh ml-deployment-green ml-service green'
+                    sh '''
+                        HOST=$(kubectl get svc ml-service -o jsonpath="{.status.loadBalancer.ingress[*].hostname}")
+                        curl -s http://$HOST:8000 | grep sklearn
+                        '''
                 }
             }
         }

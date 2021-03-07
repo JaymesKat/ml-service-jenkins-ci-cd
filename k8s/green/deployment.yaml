@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ml-deployment-green
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: ml-service
+  template:
+    metadata:
+      labels:
+        app: ml-service
+        name: green
+    spec:
+      containers:
+        - name: app
+          image: 417548009410.dkr.ecr.us-west-1.amazonaws.com/ml-microservice:latest
+          ports:
+            - containerPort: 80
