@@ -14,6 +14,7 @@ This API, built with Flask, provides access to a pre-trained, `sklearn` model th
 ## Setting up Jenkins Server
 
 Deploy Jenkins within an EC2 instance running Ubuntu 18.04. [Guide](https://www.digitalocean.com/community/tutorials/how-to-install-jenkins-on-ubuntu-18-04)
+
 SSH into server and ensure you have installed the following:
 
 - git
