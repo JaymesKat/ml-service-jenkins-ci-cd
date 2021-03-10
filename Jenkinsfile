@@ -63,7 +63,7 @@ pipeline {
                     sh './kubectl get pods'
                     sh '''
                         HOST=$(./kubectl get svc ml-service -o jsonpath="{.status.loadBalancer.ingress[*].hostname}")
-                        curl -s http://$HOST:8000 | grep sklearn
+                        curl -s http://$HOST:8000
                         '''
                     sh './kubectl describe svc ml-service'
                 }
