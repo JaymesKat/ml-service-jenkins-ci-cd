@@ -1,5 +1,3 @@
-[![JaymesKat](https://circleci.com/gh/JaymesKat/ml-microservice-kubernetes.svg?style=svg)](https://app.circleci.com/pipelines/github/JaymesKat/ml-microservice-kubernetes)
-
 ## Application Overview
 
 This API, built with Flask, provides access to a pre-trained, `sklearn` model that has been trained to predict housing prices in Boston according to several features, such as average rooms in a home and data about highway access, teacher-to-pupil ratios, and so on. You can read more about the data, which was initially taken from Kaggle, on [the data source site](https://www.kaggle.com/c/boston-housing). This API serves out predictions (inference) about housing prices through API calls. This app could be extended to any pre-trained machine learning model, such as those for image recognition and data labeling.
@@ -12,11 +10,6 @@ This API, built with Flask, provides access to a pre-trained, `sklearn` model th
 - Set up Kubernetes Cluster using Cloudformation.
 - Set up CI/CD Pipeline with Jenkins and enable multi-branch builds
 - Enable blue-green deployment of application to Kubernetes Cluster
-
-## Setup the Local Environment
-
-- Create a virtualenv and activate it
-- Run `make install` to install the necessary dependencies
 
 ## Setting up Jenkins Server
 
