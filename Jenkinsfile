@@ -26,7 +26,7 @@ pipeline {
             steps {
                 withAWS(region:'us-west-1', credentials: 'aws_credentials') {
                     sh 'cd scripts'
-                    sh './build_upload_docker.sh'
+                    sh './scripts/build_upload_docker.sh'
                 }
             }
         }
@@ -58,7 +58,7 @@ pipeline {
                     sh './kubectl get pods'
                     sh './k8s/blue-green-deploy.sh ml-deployment-green ml-service green'
                     sh '''
-                        HOST=$(kubectl get svc ml-service -o jsonpath="{.status.loadBalancer.ingress[*].hostname}")
+                        HOST=$(./kubectl get svc ml-service -o jsonpath="{.status.loadBalancer.ingress[*].hostname}")
                         curl -s http://$HOST:8000 | grep sklearn
                         '''
                 }
